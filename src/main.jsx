@@ -5,11 +5,16 @@ import App from "./App.jsx";
 import { RouterProvider } from "react-router-dom";
 import RootRouter from "./routes/RootRouter.jsx";
 import { FoodProvider } from "./context/FoodContext.jsx";
+import AuthProvider from "./firebase/AuthProvider.jsx";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <FoodProvider>
-      <RouterProvider router={RootRouter} />
-    </FoodProvider>
+    <AuthProvider>
+      <FoodProvider>
+        <RouterProvider router={RootRouter} />
+        <Toaster />
+      </FoodProvider>
+    </AuthProvider>
   </StrictMode>
 );

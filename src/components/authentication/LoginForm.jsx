@@ -1,14 +1,46 @@
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase/firebase.config";
+import { toast } from "sonner";
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  const onSubmit = (data) => console.log(data);
+
+  // Email Login
+  const onSubmit = async (data) => {
+    console.log(data);
+    const { email, password } = data;
+    try {
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Logged in Successfully");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message || "Login failed");
+    }
+  };
+
+  // Google login
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const res = await signInWithPopup(auth, provider);
+      toast.success("Logged in with google");
+      navigate("/");
+    } catch (error) {
+      toast.error("Something went Wrong. Please try again");
+    }
+  };
 
   return (
     <div className="card bg-gray-100 w-96 shadow-md ">
@@ -28,6 +60,7 @@ export const LoginForm = () => {
               render={({ field }) => (
                 <input
                   {...field}
+                  type="email"
                   className="px-10 py-3 w-88 rounded-lg border-1 border-gray-300 mb-4 outline-none "
                   placeholder="Enter your Email"
                 />
@@ -40,6 +73,7 @@ export const LoginForm = () => {
                 <input
                   {...field}
                   className="px-10 py-3 w-88 rounded-lg border-1 border-gray-300 mb-4 outline-none "
+                  type="password"
                   placeholder="Enter your Password"
                 />
               )}
@@ -52,6 +86,12 @@ export const LoginForm = () => {
             </button>
           </div>
         </form>
+        <button
+          className="px-10  py-2 w-80 rounded-full border-1 border-gray-300 outline-none  bg-orange-400 hover:bg-orange-500 text-xl font-bold text-white mb-3"
+          onClick={handleGoogleLogin}
+        >
+          Login with Google
+        </button>
         <div className="text-center text-sm">
           Don&apos;t have an account?
           <Link to="/register" className="underline underline-offset-4 ">
