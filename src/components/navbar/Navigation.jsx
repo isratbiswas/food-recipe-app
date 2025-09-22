@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FoodContext } from "../../context/FoodContext";
+import Logout from "../../pages/Logout";
 
 const Navigation = () => {
   const { searchMeals } = useContext(FoodContext);
@@ -68,12 +69,13 @@ const Navigation = () => {
           {/* Login / User */}
           <div className="hidden md:flex items-center space-x-4">
             {isLoggedIn ? (
-              <button
-                onClick={() => setIsLoggedIn(false)}
-                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
-              >
-                Logout
-              </button>
+              // <button
+              //   onClick={() => setIsLoggedIn(false)}
+              //   className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
+              // >
+              //   Logout
+              // </button>
+              <Logout />
             ) : (
               <Link
                 to="/login"
