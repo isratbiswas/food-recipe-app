@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Category = ({ meal }) => {
   return (
@@ -9,13 +10,18 @@ const Category = ({ meal }) => {
           alt={meal.strMeal}
           className="w-full h-48 object-cover rounded"
         />
-        <h3 className="text-lg font-bold mt-2">Name:{meal.strMeal}</h3>
-        <h4>Country:{meal.strArea} Cuisine</h4>
-        <h4>Instruction:{meal.strInstructions.slice(0, 140)}</h4>
+        <h2 className="text-lg font-bold mt-2">Name:{meal.strMeal}</h2>
+        <h4 className="m-2">Country:{meal.strArea} Cuisine</h4>
+        <p className="text-gray-600">
+          <span className="text-1xl font-semibold">Instruction : </span>
+          {meal.strInstructions.slice(0, 140)} ...
+        </p>
         {/* <video src={meal.strYoutube}>video </video> */}
-        <button className="bg-green-600 text-white px-6 rounded-full hover:bg-green-800 hover:text-white py-2 m-4">
-          Learn More
-        </button>
+        <Link to={`/recipeDetail/${meal.idMeal}`}>
+          <button className="bg-green-600 text-white px-6 rounded-full hover:bg-green-800 hover:text-white py-2 m-4">
+            Learn More
+          </button>
+        </Link>
       </div>
     </div>
   );

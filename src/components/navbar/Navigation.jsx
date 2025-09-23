@@ -3,9 +3,11 @@ import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FoodContext } from "../../context/FoodContext";
 import Logout from "../../pages/Logout";
+import { AuthContext } from "../../firebase/AuthProvider";
 
 const Navigation = () => {
   const { searchMeals } = useContext(FoodContext);
+  const { user } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // simple login state
   const [search, setSearch] = useState("");
@@ -68,18 +70,11 @@ const Navigation = () => {
 
           {/* Login / User */}
           <div className="hidden md:flex items-center space-x-4">
-            {isLoggedIn ? (
-              // <button
-              //   onClick={() => setIsLoggedIn(false)}
-              //   className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
-              // >
-              //   Logout
-              // </button>
+            {user ? (
               <Logout />
             ) : (
               <Link
                 to="/login"
-                onClick={() => setIsLoggedIn(true)}
                 className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition"
               >
                 Login
@@ -124,20 +119,15 @@ const Navigation = () => {
           </div>
 
           {/* Login / User */}
-          {isLoggedIn ? (
-            <button
-              onClick={() => setIsLoggedIn(false)}
-              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
-            >
-              Logout
-            </button>
+          {user ? (
+            <Logout />
           ) : (
-            <button
-              onClick={() => setIsLoggedIn(true)}
+            <Link
+              to="/login"
               className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition"
             >
               Login
-            </button>
+            </Link>
           )}
 
           {/* Navigation Links */}

@@ -4,12 +4,14 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useForm, Controller } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase.config";
 import { toast } from "sonner";
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const { control, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -24,7 +26,7 @@ export const LoginForm = () => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
       toast.success("Logged in Successfully");
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       toast.error(error.message || "Login failed");
     }

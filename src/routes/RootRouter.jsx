@@ -5,6 +5,8 @@ import Home from "../pages/Home";
 import Categories from "../pages/CategoriesPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import PrivateRoutes from "../firebase/PrivateRoutes";
+import RecipeDetails from "../components/recipes/RecipeDetails";
 
 const RootRouter = createBrowserRouter([
   {
@@ -13,7 +15,18 @@ const RootRouter = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/categories", element: <Categories /> },
+      {
+        path: "/categories",
+        element: (
+          <PrivateRoutes>
+            <Categories />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/recipeDetail/:idMeal",
+        element: <RecipeDetails />,
+      },
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
     ],

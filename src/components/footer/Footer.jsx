@@ -10,7 +10,7 @@ const Footer = () => {
           <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent tracking-wide">
             SavorySpoon
           </h1>
-          <p className="text-gray-400">
+          <p className="text-gray-400 mt-4">
             Discover delicious recipes, cooking tips, and food inspiration for
             every occasion.
           </p>
@@ -19,16 +19,25 @@ const Footer = () => {
         {/* Quick Links */}
         <div>
           <h3 className="font-semibold text-white mb-4">Quick Links</h3>
-          <ul className="space-y-2">
-            <Link to="/" className="hover:text-green-500 transition">
-              Home
-            </Link>
-            <Link to="/categories" className="hover:text-green-500 transition">
-              Categories
-            </Link>
-            <Link to="/favorites" className="hover:text-green-500 transition">
-              Favorites
-            </Link>
+          <ul className="space-y-2 block">
+            <li>
+              <Link to="/" className="hover:text-green-500 transition">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/categories"
+                className="hover:text-green-500 transition"
+              >
+                Categories
+              </Link>
+            </li>
+            <li>
+              <Link to="/favorites" className="hover:text-green-500 transition">
+                Favorites
+              </Link>
+            </li>
           </ul>
         </div>
 

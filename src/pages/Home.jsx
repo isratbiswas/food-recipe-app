@@ -1,4 +1,4 @@
-import React from "react";
+import Bannar from "../components/navbar/Bannar";
 import Services from "../components/services/Services";
 import ReviewClient from "../components/review/ReviewClient";
 import NewsLetter from "../components/newsLetter/NewsLetter";
@@ -8,6 +8,7 @@ import BlogSection from "../components/blog/BlogSection";
 const Home = () => {
   return (
     <div>
+      <Bannar />
       <Services />
       <ReviewClient />
       <NewsLetter />
